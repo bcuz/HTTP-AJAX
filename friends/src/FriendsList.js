@@ -1,12 +1,10 @@
 import React from 'react';
-// import Todo from './Todo';
+import Friend from './Friend';
 
 const FriendsList = props => {
   return (
     <ul>
-      {props.friends.map(friend => <li>{friend.name}</li>)}
-      {/* {props.friends.map(todo => <Todo task={todo} toggleItem={props.toggleItem} />)} */}
-
+      {props.friends.map(friend => <Friend friend={friend} />)}
     </ul>
   );
 };
