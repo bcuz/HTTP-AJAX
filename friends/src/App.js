@@ -15,10 +15,23 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
+  handleFormSend = e => {
+    e.preventDefault();
+  }
+
   render() {
     return (
       <div>        
         <FriendsList friends={this.state.friends} />
+        <form onSubmit={this.handleFormSend}>
+          <label>Name</label>
+          <input />
+          <label>Age</label>
+          <input />
+          <label>Email</label>
+          <input />
+          <input type='submit' />
+        </form>
       </div>
     );
   }
