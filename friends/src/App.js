@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import FriendsList from './FriendsList';
+import FriendsList from './components/FriendsList';
+import Form from './components/Form';
 import './App.css';
 
 class App extends Component {
   state = {
-    friends: [],
-    friend: {
-      name: '',
-      age: '',
-      email: ''
-    }
+    friends: []    
   }
 
   componentDidMount() {
@@ -33,33 +29,11 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
-  handleFormSend = e => {
-    e.preventDefault();
-    this.postFriend(this.state.friend)
-  }
-
-  handleInputChange = e => {
-    this.setState({
-      friend: {
-        ...this.state.friend,
-        [e.target.name]: e.target.value
-      }
-    });
-  };
-
   render() {
     return (
       <div>        
         <FriendsList friends={this.state.friends} />
-        <form onSubmit={this.handleFormSend}>
-          <label>Name</label>
-          <input onChange={this.handleInputChange} name="name" />
-          <label>Age</label>
-          <input onChange={this.handleInputChange} name="age" />
-          <label>Email</label>
-          <input onChange={this.handleInputChange} name="email" />
-          <input type='submit' />
-        </form>
+        <Form postFriend={this.postFriend} />        
       </div>
     );
   }
