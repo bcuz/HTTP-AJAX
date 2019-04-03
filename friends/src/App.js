@@ -5,7 +5,12 @@ import './App.css';
 
 class App extends Component {
   state = {
-    friends: []
+    friends: [],
+    friend: {
+      name: '',
+      age: '',
+      email: ''
+    }
   }
 
   componentDidMount() {
@@ -15,9 +20,32 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
+  postFriend = friend => {
+    axios
+      // not quite sure why we post like this
+      .post(`http://localhost:5000/friends`, friend)
+      // why is the res not being used?
+      .then(res => {                
+        this.setState(prevState => {
+          return { friends: [...prevState.friends, friend]}
+        })
+      })
+      .catch(err => console.log(err));
+  };
+
   handleFormSend = e => {
     e.preventDefault();
+    this.postFriend(this.state.friend)
   }
+
+  handleInputChange = e => {
+    this.setState({
+      friend: {
+        ...this.state.friend,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
 
   render() {
     return (
@@ -25,11 +53,11 @@ class App extends Component {
         <FriendsList friends={this.state.friends} />
         <form onSubmit={this.handleFormSend}>
           <label>Name</label>
-          <input />
+          <input onChange={this.handleInputChange} name="name" />
           <label>Age</label>
-          <input />
+          <input onChange={this.handleInputChange} name="age" />
           <label>Email</label>
-          <input />
+          <input onChange={this.handleInputChange} name="email" />
           <input type='submit' />
         </form>
       </div>
