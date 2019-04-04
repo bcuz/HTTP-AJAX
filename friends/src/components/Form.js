@@ -12,13 +12,21 @@ class Form extends Component {
   handleFormSend = e => {
     e.preventDefault();
     this.props.postFriend(this.state.friend)
+    this.setState({
+      friend: {
+        name: '',
+        age: '',
+        email: ''
+      }
+    });
   }
 
   handleInputChange = e => {
     this.setState({
       friend: {
         ...this.state.friend,
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
+        id: this.props.friends[this.props.friends.length-1].id + 1
       }
     });
   };
@@ -26,11 +34,11 @@ class Form extends Component {
     return (
       <form onSubmit={this.handleFormSend}>
         <label>Name</label>
-        <input onChange={this.handleInputChange} name="name" />
+        <input onChange={this.handleInputChange} value={this.state.friend.name} name="name" />
         <label>Age</label>
-        <input onChange={this.handleInputChange} name="age" />
+        <input onChange={this.handleInputChange} value={this.state.friend.age} name="age" />
         <label>Email</label>
-        <input onChange={this.handleInputChange} name="email" />
+        <input onChange={this.handleInputChange} value={this.state.friend.email} name="email" />
         <input type='submit' />
       </form>
     );

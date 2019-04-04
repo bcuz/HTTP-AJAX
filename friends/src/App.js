@@ -29,11 +29,16 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
+  updateItems = newFriends => {
+    this.setState({ friends: newFriends });
+  };
+
   render() {
     return (
       <div>        
-        <FriendsList friends={this.state.friends} />
-        <Form postFriend={this.postFriend} />        
+        <FriendsList friends={this.state.friends} updateItems={this.updateItems} />
+        <h3>Add new friend</h3>
+        <Form friends={this.state.friends} postFriend={this.postFriend} />        
       </div>
     );
   }

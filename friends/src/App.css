@@ -1,3 +1,10 @@
 label, input {
   display: block;
 }
+
+li {
+  max-width: 200px;
+  display: flex;
+  justify-content: space-between;
+  list-style: disc
+}
