@@ -60,15 +60,18 @@ class Form extends Component {
   };
   render() {
     return (
-      <form onSubmit={this.handleFormSend}>
-        <label>Name</label>
-        <input onChange={this.handleInputChange} value={this.state.friend.name} name="name" />
-        <label>Age</label>
-        <input onChange={this.handleInputChange} value={this.state.friend.age} name="age" />
-        <label>Email</label>
-        <input onChange={this.handleInputChange} value={this.state.friend.email} name="email" />
-        <input type='submit' />
-      </form>
+      <div>
+        {this.props.location.pathname.includes('update') ? <h3>Updating Friend #{this.props.match.params.id}</h3> : <h3>Add a new friend</h3>}
+        <form onSubmit={this.handleFormSend}>
+          <label>Name</label>
+          <input required onChange={this.handleInputChange} value={this.state.friend.name} name="name" />
+          <label>Age</label>
+          <input required onChange={this.handleInputChange} value={this.state.friend.age} name="age" />
+          <label>Email</label>
+          <input required onChange={this.handleInputChange} value={this.state.friend.email} name="email" />
+          <input type='submit' />
+        </form>
+      </div>
     );
   }
 };

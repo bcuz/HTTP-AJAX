@@ -15,7 +15,13 @@ const Friend = props => {
       .catch(err => console.log(err));
   };
 
-  return <li><button onClick={deleteItem}>X</button><Link to={`/update/${id}`}>Update</Link><span>{name} is {age}</span></li>
+  return (
+    <li>
+      <button onClick={deleteItem}>X</button>
+      <Link to={`/update/${id}`}>Update</Link>
+      {name} is {age}
+    </li>
+  )
 };
 
 export default Friend;
