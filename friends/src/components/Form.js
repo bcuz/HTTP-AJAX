@@ -12,7 +12,7 @@ class Form extends Component {
 
   postFriend = friend => {
     axios
-      // not quite sure why we post like this
+      // friend data is added to the array
       .post(`http://localhost:5000/friends`, friend)
       .then(response => {                
         this.props.updateItems(response.data);
@@ -24,6 +24,7 @@ class Form extends Component {
     const id = this.props.match.params.id;
 
     axios
+      // friend obj replaces obj at existing id
       .put(`http://localhost:5000/friends/${id}`, friend)
       .then(response => {        
         this.props.updateItems(response.data);
@@ -66,9 +67,10 @@ class Form extends Component {
           <label>Name</label>
           <input required onChange={this.handleInputChange} value={this.state.friend.name} name="name" />
           <label>Age</label>
-          <input required onChange={this.handleInputChange} value={this.state.friend.age} name="age" />
+          <input required type="number"
+ onChange={this.handleInputChange} value={this.state.friend.age} name="age" />
           <label>Email</label>
-          <input required onChange={this.handleInputChange} value={this.state.friend.email} name="email" />
+          <input required type="email" onChange={this.handleInputChange} value={this.state.friend.email} name="email" />
           <input type='submit' />
         </form>
       </div>
