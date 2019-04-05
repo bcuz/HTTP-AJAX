@@ -37,12 +37,19 @@ class Form extends Component {
     }
   }
 
-  handleInputChange = e => {
-    this.setState({
-      friend: {
-        ...this.state.friend,
-        [e.target.name]: e.target.value,
-        id: this.props.friends[this.props.friends.length-1].id + 1
+  handleInputChange = ev => {
+    ev.persist();
+    let value = ev.target.value;
+    this.setState(prevState => {
+            
+      return {
+        friend: {
+          ...prevState.friend,
+          [ev.target.name]: value,
+          // if i dont set the id, delete button needs to be pressed twice to work
+          id: this.props.friends[this.props.friends.length-1].id + 1
+        }
+
       }
     });
   };

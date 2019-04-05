@@ -4,7 +4,8 @@ label, input {
 
 li {
   max-width: 200px;
-  display: flex;
-  justify-content: space-between;
-  list-style: disc
+}
+
+li a, li button {
+  margin-right: 10px;
 }

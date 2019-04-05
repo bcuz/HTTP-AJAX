@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router,  Route } from "react-router-dom";
 import FriendsList from './components/FriendsList';
 import Form from './components/Form';
 import './App.css';
@@ -38,9 +38,9 @@ class App extends Component {
     return (
       <Router>
         <div>                  
-          <Route exact path="/" render={() => <FriendsList friends={this.state.friends} /> } />          
+          <Route exact path="/" render={() => <FriendsList friends={this.state.friends} updateItems={this.updateItems} /> } />          
           <Route exact path="/" render={props => <Form {...props} postFriend={this.postFriend} friends={this.state.friends} /> } />          
-          <Route path="/update/:id" render={props => <Form {...props} putFriend={this.putFriend} postFriend={this.postFriend} updateItems={this.updateItems} friends={this.state.friends} /> } />          
+          <Route path="/update/:id" render={props => <Form {...props} putFriend={this.putFriend} updateItems={this.updateItems} friends={this.state.friends} /> } />          
         </div>
       </Router>
     );
