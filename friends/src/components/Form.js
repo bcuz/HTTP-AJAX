@@ -10,14 +10,22 @@ class Form extends Component {
     }
   }
 
+  postFriend = friend => {
+    axios
+      // not quite sure why we post like this
+      .post(`http://localhost:5000/friends`, friend)
+      .then(response => {                
+        this.props.updateItems(response.data);
+      })
+      .catch(err => console.log(err));
+  };
+
   putFriend = friend => {
     const id = this.props.match.params.id;
 
     axios
       .put(`http://localhost:5000/friends/${id}`, friend)
-      .then(response => {
-        console.log(response.data);
-        
+      .then(response => {        
         this.props.updateItems(response.data);
         this.props.history.push('/')
       })
@@ -30,7 +38,7 @@ class Form extends Component {
     if (this.props.location.pathname.includes('update')) {
       this.putFriend(this.state.friend)
     } else {
-      this.props.postFriend(this.state.friend)
+      this.postFriend(this.state.friend)
       this.setState({
         friend: { name: '', age: '', email: '' }
       });
@@ -46,10 +54,7 @@ class Form extends Component {
         friend: {
           ...prevState.friend,
           [ev.target.name]: value,
-          // if i dont set the id, delete button needs to be pressed twice to work
-          id: this.props.friends[this.props.friends.length-1].id + 1
         }
-
       }
     });
   };

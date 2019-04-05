@@ -17,19 +17,6 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
-  postFriend = friend => {
-    axios
-      // not quite sure why we post like this
-      .post(`http://localhost:5000/friends`, friend)
-      // why is the res not being used?
-      .then(res => {                
-        this.setState(prevState => {
-          return { friends: [...prevState.friends, friend]}
-        })
-      })
-      .catch(err => console.log(err));
-  };
-
   updateItems = newFriends => {
     this.setState({ friends: newFriends });
   };
@@ -39,8 +26,8 @@ class App extends Component {
       <Router>
         <div>                  
           <Route exact path="/" render={() => <FriendsList friends={this.state.friends} updateItems={this.updateItems} /> } />          
-          <Route exact path="/" render={props => <Form {...props} postFriend={this.postFriend} friends={this.state.friends} /> } />          
-          <Route path="/update/:id" render={props => <Form {...props} putFriend={this.putFriend} updateItems={this.updateItems} friends={this.state.friends} /> } />          
+          <Route exact path="/" render={props => <Form {...props} updateItems={this.updateItems} friends={this.state.friends} /> } />          
+          <Route path="/update/:id" render={props => <Form {...props} updateItems={this.updateItems} friends={this.state.friends} /> } />          
         </div>
       </Router>
     );
