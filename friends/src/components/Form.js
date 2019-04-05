@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Form extends Component {
   state = {
@@ -9,16 +10,31 @@ class Form extends Component {
     }
   }
 
+  putFriend = friend => {
+    const id = this.props.match.params.id;
+
+    axios
+      .put(`http://localhost:5000/friends/${id}`, friend)
+      .then(response => {
+        console.log(response.data);
+        
+        this.props.updateItems(response.data);
+        this.props.history.push('/')
+      })
+      .catch(err => console.log(err));
+
+  }
+
   handleFormSend = e => {
     e.preventDefault();
-    this.props.postFriend(this.state.friend)
-    this.setState({
-      friend: {
-        name: '',
-        age: '',
-        email: ''
-      }
-    });
+    if (this.props.location.pathname.includes('update')) {
+      this.putFriend(this.state.friend)
+    } else {
+      this.props.postFriend(this.state.friend)
+      this.setState({
+        friend: { name: '', age: '', email: '' }
+      });
+    }
   }
 
   handleInputChange = e => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link} from "react-router-dom";
 import axios from 'axios';
 
 const Friend = props => {
@@ -14,7 +15,7 @@ const Friend = props => {
       .catch(err => console.log(err));
   };
 
-  return <li>{name} is {age}<button onClick={deleteItem}>X</button></li>
+  return <li>{name} is {age}<Link to={`/update/${id}`}>Update</Link><button onClick={deleteItem}>X</button></li>
 };
 
 export default Friend;
